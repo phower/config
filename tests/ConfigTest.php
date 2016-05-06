@@ -294,4 +294,66 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $config->rewind();
         $this->assertEquals('string_value', $config->key());
     }
+
+    public function testMagicGetterCallsGet()
+    {
+        $config = new \Phower\Config\Config($this->config);
+        $this->assertEquals($config->get('string_value'), $config->string_value);
+        $this->assertEquals($config->get('array_value')->get('foo'), $config->array_value->foo);
+    }
+
+    public function testMagicSetterCallsSet()
+    {
+        $config = new \Phower\Config\Config($this->config, false);
+        $this->assertFalse($config->has('zaa'));
+        $config->zaa = true;
+        $this->assertTrue($config->has('zaa'));
+        $this->assertFalse($config->get('array_value')->has('zaa'));
+        $config->array_value->zaa = true;
+        $this->assertTrue($config->get('array_value')->has('zaa'));
+    }
+
+    public function testMagicUnsetterCallsRemove()
+    {
+        $config = new \Phower\Config\Config($this->config, false);
+        $this->assertTrue($config->has('string_value'));
+        unset($config->string_value);
+        $this->assertFalse($config->has('string_value'));
+    }
+
+    public function testMagicCallerCanCallSet()
+    {
+        $config = new \Phower\Config\Config($this->config, false, true);
+        $this->assertTrue($config->has('string_value'));
+        $config->setStringValue('new value');
+        $this->assertEquals('new value', $config->stringValue);
+    }
+
+    public function testMagicCallerCanCallGet()
+    {
+        $config = new \Phower\Config\Config($this->config);
+        $this->assertEquals($config->stringValue, $config->getStringValue());
+    }
+
+    public function testMagicCallerCanCallHas()
+    {
+        $config = new \Phower\Config\Config($this->config);
+        $this->assertTrue($config->hasStringValue());
+        $this->assertFalse($config->hasUndefined());
+    }
+
+    public function testMagicCallerCanCallRemove()
+    {
+        $config = new \Phower\Config\Config($this->config, false);
+        $this->assertTrue($config->hasStringValue());
+        $config->removeStringValue();
+        $this->assertFalse($config->hasStringValue());
+    }
+
+    public function testMagicCallerRaisesExceptionWhenInvalidMethodIsCalled()
+    {
+        $config = new \Phower\Config\Config($this->config);
+        $this->setExpectedException(\Phower\Config\Exception\InvalidMethodNameException::class);
+        $config->invalidMethod();
+    }
 }

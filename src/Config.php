@@ -56,6 +56,74 @@ class Config implements ConfigInterface
     }
 
     /**
+     * Magic getter
+     *
+     * @param string $key
+     * @return mixed
+     */
+    public function __get($key)
+    {
+        return $this->get($key);
+    }
+
+    /**
+     * Magic setter
+     *
+     * @param string $key
+     * @param mixed $value
+     * @return \Phower\Config\Config
+     */
+    public function __set($key, $value)
+    {
+        return $this->set($key, $value);
+    }
+
+    /**
+     * Magic unsetter
+     *
+     * @param string $key
+     * @return \Phower\Config\Config
+     */
+    public function __unset($key)
+    {
+        return $this->remove($key);
+    }
+
+    /**
+     * Magic caller
+     *
+     * @param string $name
+     * @param array $arguments
+     * @return mixed
+     * @throws Exception\InvalidMethodNameException
+     */
+    public function __call($name, $arguments)
+    {
+        if (substr($name, 0, 3) === 'set' && strlen($name) > 3 && count($arguments) === 1) {
+            $key = substr($name, 3);
+            $value = $arguments[0];
+            return $this->set($key, $value);
+        }
+
+        if (substr($name, 0, 3) === 'get' && strlen($name) > 3) {
+            $key = substr($name, 3);
+            return $this->get($key);
+        }
+
+        if (substr($name, 0, 3) === 'has' && strlen($name) > 3) {
+            $key = substr($name, 3);
+            return $this->has($key);
+        }
+
+        if (substr($name, 0, 6) === 'remove' && strlen($name) > 6) {
+            $key = substr($name, 6);
+            return $this->remove($key);
+        }
+
+        throw new Exception\InvalidMethodNameException($name);
+    }
+
+    /**
      * Checks weither a key exists.
      *
      * @param string|int $key
