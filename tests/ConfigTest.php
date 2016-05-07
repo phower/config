@@ -193,31 +193,31 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeCount(count($this->config) + 2, 'keys', $config);
     }
 
-    public function testIsReadOnlyReturnsTrueWhenConfigInstanceIsReadOnly()
+    public function testReadOnlyReturnsTrueWhenConfigInstanceIsReadOnly()
     {
         $config = new \Phower\Config\Config();
-        $this->assertTrue($config->isReadOnly());
+        $this->assertTrue($config->readOnly());
     }
 
-    public function testSetReadOnlyCanChangeReadOnlyState()
+    public function testReadOnlyCanChangeReadOnlyState()
     {
         $config = new \Phower\Config\Config();
-        $this->assertTrue($config->isReadOnly());
-        $config->setReadOnly(false);
-        $this->assertFalse($config->isReadOnly());
+        $this->assertTrue($config->readOnly());
+        $config->readOnly(false);
+        $this->assertFalse($config->readOnly());
     }
 
     public function testAllowOverrideReturnsTrueWhenConfigInstanceAllowsOverride()
     {
-        $config = new \Phower\Config\Config();
-        $this->assertTrue($config->isReadOnly([], true, true));
+        $config = new \Phower\Config\Config([], true, true);
+        $this->assertTrue($config->readOnly());
     }
 
-    public function testSetAllowOverrideCanChangeAllowOverrideState()
+    public function testAllowOverrideCanChangeAllowOverrideState()
     {
         $config = new \Phower\Config\Config();
         $this->assertFalse($config->allowOverride());
-        $config->setAllowOverride(true);
+        $config->allowOverride(true);
         $this->assertTrue($config->allowOverride());
     }
 

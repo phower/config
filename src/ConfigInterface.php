@@ -10,16 +10,12 @@
 
 namespace Phower\Config;
 
-use ArrayAccess;
-use Countable;
-use Iterator;
-
 /**
  * Config interface
  *
  * @author Pedro Ferreira <pedro@phower.com>
  */
-interface ConfigInterface extends ArrayAccess, Countable, Iterator
+interface ConfigInterface
 {
 
     /**
@@ -61,6 +57,13 @@ interface ConfigInterface extends ArrayAccess, Countable, Iterator
     public function remove($key);
 
     /**
+     * Returns current options as an array.
+     *
+     * @return array
+     */
+    public function toArray();
+
+    /**
      * Merges another Config instance into this one.
      *
      * @param \Phower\Config\ConfigInterface $config
@@ -69,39 +72,18 @@ interface ConfigInterface extends ArrayAccess, Countable, Iterator
     public function merge(ConfigInterface $config);
 
     /**
-     * Returns current options as an array.
-     *
-     * @return array
+     * Sets or checks weither instance is read-only
+     * 
+     * @param bool|null $readOnly
+     * @return \Phower\Config\ConfigInterface|bool
      */
-    public function toArray();
+    public function readOnly($readOnly = null);
 
     /**
-     * Checks weither the config instance is read-only.
-     *
-     * @return bool
+     * Sets or checks weither instance allows override
+     * 
+     * @param bool|null $allowOverride
+     * @return \Phower\ConfigInterface\Config|bool
      */
-    public function isReadOnly();
-
-    /**
-     * Set config instance read-only.
-     *
-     * @param bool $readOnly
-     * @return \Phower\Config\ConfigInterface
-     */
-    public function setReadOnly($readOnly);
-
-    /**
-     * Checks weither the config instance allows overrides.
-     *
-     * @return bool
-     */
-    public function allowOverride();
-
-    /**
-     * Set config instance to allow override.
-     *
-     * @param bool $allowOverride
-     * @return \Phower\Config\ConfigInterface
-     */
-    public function setAllowOverride($allowOverride);
+    public function allowOverride($allowOverride = null);
 }

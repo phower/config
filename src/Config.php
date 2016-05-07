@@ -10,12 +10,16 @@
 
 namespace Phower\Config;
 
+use ArrayAccess;
+use Countable;
+use Iterator;
+
 /**
  * Base implementation of Config interface.
  *
  * @author Pedro Ferreira <pedro@phower.com>
  */
-class Config implements ConfigInterface
+class Config implements ConfigInterface, ArrayAccess, Countable, Iterator
 {
 
     /**
@@ -271,45 +275,33 @@ class Config implements ConfigInterface
     }
 
     /**
-     * Checks weither the config instance is read-only.
-     *
-     * @return bool
+     * Sets or checks weither instance is read-only
+     * 
+     * @param bool|null $readOnly
+     * @return \Phower\Config\Config|bool
      */
-    public function isReadOnly()
+    public function readOnly($readOnly = null)
     {
-        return $this->readOnly;
-    }
+        if ($readOnly === null) {
+            return $this->readOnly;
+        }
 
-    /**
-     * Set config instance read-only.
-     *
-     * @param bool $readOnly
-     * @return \Phower\Config\Config
-     */
-    public function setReadOnly($readOnly)
-    {
         $this->readOnly = (bool) $readOnly;
         return $this;
     }
 
     /**
-     * Checks weither the config instance allows overrides.
-     *
-     * @return bool
+     * Sets or checks weither instance allows override
+     * 
+     * @param bool|null $allowOverride
+     * @return \Phower\Config\Config|bool
      */
-    public function allowOverride()
+    public function allowOverride($allowOverride = null)
     {
-        return $this->allowOverride;
-    }
+        if ($allowOverride === null) {
+            return $this->allowOverride;
+        }
 
-    /**
-     * Set config instance to allow override.
-     *
-     * @param bool $allowOverride
-     * @return \Phower\Config\Config
-     */
-    public function setAllowOverride($allowOverride)
-    {
         $this->allowOverride = (bool) $allowOverride;
         return $this;
     }
@@ -434,4 +426,5 @@ class Config implements ConfigInterface
     {
         reset($this->keys);
     }
+
 }
