@@ -1,7 +1,8 @@
 {
     "name": "phower/config",
-    "description": "General purpose PHP configuration package.",
+    "description": "Simplified methods to handle configuration data in PHP.",
     "homepage": "https://github.com/phower/config",
+    "issues": "https://github.com/phower/config/issues",
     "type": "library",
     "keywords": [
         "php",

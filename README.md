@@ -1,13 +1,20 @@
 Phower Config
 =============
 
-Implementation of simplified methods to handle configuration data.
+Simplified methods to handle configuration data in PHP.
+
+Requirements
+------------
+
+Phower Config requires:
+
+-   [PHP 5.6](http://php.net/releases/5_6_0.php) or above; 
+    version [7.0](http://php.net/releases/7_0_0.php) is recommended
 
 Instalation
 -----------
 
-Add Phower Config to any [PHP](http://php.net/) project using 
-[Composer](https://getcomposer.org/):
+Add Phower Config to any PHP project using [Composer](https://getcomposer.org/):
 
 ```bash
 composer require phower/config
