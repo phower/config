@@ -250,6 +250,13 @@ follow these steps:
 
 Thank you!
 
+Changes and Versioning
+----------------------
+
+All relevant changes on this code are logged in a separated [log](CHANGELOG.md) file.
+
+Version numbers follow recommendations from [Semantic Versioning](http://semver.org/).
+
 License
 -------
 
