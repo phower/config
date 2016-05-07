@@ -276,7 +276,7 @@ class Config implements ConfigInterface, ArrayAccess, Countable, Iterator
 
     /**
      * Sets or checks weither instance is read-only
-     * 
+     *
      * @param bool|null $readOnly
      * @return \Phower\Config\Config|bool
      */
@@ -292,7 +292,7 @@ class Config implements ConfigInterface, ArrayAccess, Countable, Iterator
 
     /**
      * Sets or checks weither instance allows override
-     * 
+     *
      * @param bool|null $allowOverride
      * @return \Phower\Config\Config|bool
      */
@@ -426,5 +426,4 @@ class Config implements ConfigInterface, ArrayAccess, Countable, Iterator
     {
         reset($this->keys);
     }
-
 }

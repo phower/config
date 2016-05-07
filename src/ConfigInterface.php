@@ -73,7 +73,7 @@ interface ConfigInterface
 
     /**
      * Sets or checks weither instance is read-only
-     * 
+     *
      * @param bool|null $readOnly
      * @return \Phower\Config\ConfigInterface|bool
      */
@@ -81,7 +81,7 @@ interface ConfigInterface
 
     /**
      * Sets or checks weither instance allows override
-     * 
+     *
      * @param bool|null $allowOverride
      * @return \Phower\ConfigInterface\Config|bool
      */
