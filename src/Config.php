@@ -83,6 +83,17 @@ class Config implements ConfigInterface, ArrayAccess, Countable, Iterator
     }
 
     /**
+     * Magic isset
+     *
+     * @param string $key
+     * @return bool
+     */
+    public function __isset($key)
+    {
+        return $this->has($key);
+    }
+
+    /**
      * Magic unsetter
      *
      * @param string $key

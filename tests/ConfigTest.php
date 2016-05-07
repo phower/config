@@ -313,6 +313,13 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($config->get('array_value')->has('zaa'));
     }
 
+    public function testMagicIssetCallsHas()
+    {
+        $config = new \Phower\Config\Config($this->config, false);
+        $this->assertTrue($config->has('string_value'));
+        $this->assertTrue(isset($config->string_value));
+    }
+
     public function testMagicUnsetterCallsRemove()
     {
         $config = new \Phower\Config\Config($this->config, false);
